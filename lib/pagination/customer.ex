@@ -17,4 +17,11 @@ defmodule Pagination.Customer do
 
     timestamps()
   end
+
+  def changeset(user, attrs) do
+    user
+    |> cast(attrs, [:index, :customer_id, :first_name, :last_name, :company, :city, :country, :phone_1, :phone_2, :email, :subscription_date, :website])
+    |> validate_required([:customer_id, :first_name, :last_name, :phone_1, :email])
+    |> unique_constraints(:index)
+  end
 end
