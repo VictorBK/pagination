@@ -1,27 +1,25 @@
-defmodule Pagination.Customer do
+defmodule Pagination.Customers.Customer do
   use Ecto.Schema
 
+  import Ecto.Changeset
+
   schema "customers" do
-    field :index, :integer
-    field :customer_id, :string
     field :first_name, :string
     field :last_name, :string
-    field :company, :string
-    field :city, :string
     field :country, :string
-    field :phone_1, :string
-    field :phone_2, :string
     field :email, :string
     field :subscription_date, :date
-    field :website, :string
 
     timestamps()
   end
 
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:index, :customer_id, :first_name, :last_name, :company, :city, :country, :phone_1, :phone_2, :email, :subscription_date, :website])
-    |> validate_required([:customer_id, :first_name, :last_name, :phone_1, :email])
-    |> unique_constraints(:index)
+    |> cast(attrs, [:first_name, :last_name, :country, :email, :subscription_date])
+    |> validate_required([:first_name, :last_name, :email])
+    |> validate_format(:email, ~r/^[^\s]+@[^\s]+\.[^\s]+$/, message: "must be a valid email address")
+    |> validate_length(:first_name, min: 2, max: 20)
+    |> validate_length(:last_name, min: 2, max: 20)
+    |> unique_constraint(:email)
   end
 end
