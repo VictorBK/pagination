@@ -3,8 +3,8 @@ defmodule Pagination.Repo.Migrations.CreateCustomers do
 
   def change do
     create table(:customers) do
-      add :first_name, :string
-      add :last_name, :string
+      add :first_name, :string, null: false
+      add :last_name, :string, null: false
       add :country, :string
       add :email, :string
       add :subscription_date, :date
@@ -12,7 +12,6 @@ defmodule Pagination.Repo.Migrations.CreateCustomers do
       timestamps()
     end
 
-    create index(:customers, [:customer_id])
     create index(:customers, [:email])
     create index(:customers, [:country])
     create index(:customers, [:subscription_date])
