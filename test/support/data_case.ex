@@ -24,6 +24,7 @@ defmodule Pagination.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import Pagination.DataCase
+      import Pagination.CustomersFixtures
     end
   end
 
