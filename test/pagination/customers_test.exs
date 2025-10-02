@@ -19,5 +19,15 @@ describe "list_customers/1" do
       assert length(result.data) == 3
     end
 
+    test "page_size works correctly" do
+      customers_fixture(10)
+
+      result = Customers.list_customers(5)
+
+      assert length(result.data) == 5
+      assert result.has_more == true
+    end
+
   end
+
 end
